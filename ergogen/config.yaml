@@ -1,0 +1,160 @@
+meta:
+  engine: 4.1.0
+units:
+  kx: cx
+  ky: cy
+  px: kx + 2
+  py: ky + 2
+  
+  w: 18
+  h: 17
+
+  $default_width: u
+  $default_height: u
+
+  starting_x: 100
+  starting_y: -120
+
+  # Default M2 Screws
+  screwSize: 1
+  standoffSize: 2.5
+points:
+  zones:
+    matrix:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        rotate: 8
+      columns:
+        pinky:
+          rows.r3.skip: true
+          rows.r2.skip: true
+          key:
+            adjust:
+              shift: [0, 0.2ky]
+        ring:
+          key:
+            splay: -5
+            spread: 21
+        middle:
+          key:
+            spread: 20
+            splay: -5
+            stagger: 5
+        index:
+          key:
+            stagger: -5
+
+        inner:
+          rows.r3.skip: true
+          key:
+            adjust:
+              shift: [0, 0.3ky]
+
+      rows:
+        r1:
+        r2:
+        r3:
+    
+    thumbfan:
+      anchor:
+        shift: [2.5kx, -0.9ky]
+      columns:
+        1:
+        2.key:
+          splay: -15
+          stagger: -2.7
+          spread: u + 2
+        3.key:
+          splay: 75
+          stagger: 2
+          spread: u + 3.5
+          tags: key1.5u
+
+      rows:
+        r4:
+        
+outlines:
+  _keys:
+    - what: rectangle
+      where: true
+      size: [17.5,16.5]
+    - what: rectangle
+      where: [key1.5u]
+      size: [26.5, 16.5]
+      fillet: 1
+
+  _outline:
+    - what: path
+      operation: stack
+      fillet: 2
+      segments:
+        # ERROR: Line segment requires at least 2 distinct points.
+        - type: line
+          points:
+            - ref: matrix_pinky_r1
+              shift: [-0.8px, 0.6py]
+            - ref: matrix_pinky_r1
+              shift: [-0.8px, 0.6py]
+        - type: arc
+          points:
+            - ref: matrix_middle_r3
+              shift: [-0.5px, 0.69py]
+            - ref: matrix_inner_r2
+              shift: [0.57px, 0.65py]
+        - type: line
+          points:
+            - ref: matrix_inner_r1
+              shift: [0.69px, -0.5py]
+            - ref: thumbfan_3_r4
+              shift: [0.68px, -0.58py]
+            - ref: thumbfan_3_r4
+              shift: [-0.7px, -0.6py]
+        - type: arc
+          points:
+            - ref: thumbfan_1_r4
+              shift: [-0.46px, -0.55py]
+            - ref: matrix_ring_r1
+              shift: [-1.56px, -1.76py]
+        - type: line
+          points:
+            - ref: matrix_pinky_r1
+              shift: [-0.8px, 0.42py]
+  
+  combo:
+    - name: _keys
+    - name: _outline
+      operation: stack
+  
+  switch_plate_keys:
+    - what: rectangle
+      where: true
+      size: [u-5.2,u-5.2] # this makes it 13.8 for choc
+
+  xlBoard:
+    - name: _outline
+      expand: 2
+    # - name: mounting
+    #   operation: subtract
+
+  switch_plate:
+    - name: xlBoard
+    - operation: subtract
+      name: switch_plate_keys
+
+  _wall_outline:
+    - name: xlBoard
+    - operation: subtract
+      name: _outline
+pcbs:
+cases:
+  _wall:
+    - name: _wall_outline
+      extrude: 7
+  plate_tester:
+    - what: case
+      name: _wall
+    - name: switch_plate
+      shift: [0,0,5]
+      extrude: 2
