@@ -14,16 +14,15 @@ Features
 
 <br>
 
-The board is quite thin
+The board is quite thin!
 <div align="center">
     <img src="photos/IMG_8299.jpg" width="400">
 </div>
 
-The board is diodeless, meaning you have to connect each hotswap to GND and a GPIO pin.\\
-This means that the wiring for the board can get a little messy.
+The board is diodeless, meaning you have to connect each hotswap to GND and a GPIO pin. This means that the wiring for the board can get a little messy.
 
 <div align="center">
-    <img src="photos/IMG_8295.jpg" width="400">
+    <img src="photos/IMG_8295.JPG" width="400">
 </div>
 
 I used a mix of hotglue and super glue to hold the microcontroller in place.
@@ -36,5 +35,6 @@ Having 6 missing alpha keys means that you need to find a place for 3 keys on ea
 <img src="photos/eden-keymap2.png" width="800">
 <br>
 The rest of the layers are just normal, with a numpad like thing on the right side for the numbers. And a slightly modified version of the "upper" layer from my normal 36key layout. There is the fn-nav-bootloader layer that has some common FN keys, keys to put the MCUs into their bootloader mode, to flash new firmware (because this keyboard does not have physical reset buttons), and then some arrow keys under the right hand.
+<br>
 <br>
 The only thing I had to sacrifice, other than 3 keys on each half, was the double arrow key setup that I have on my normal 36key layout. Meaning I can't use both of my thumbs to access a layer that has arrows on them.
